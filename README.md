@@ -355,3 +355,54 @@
 ## 许可
 
 本项目采用 [MIT 许可证](LICENSE)。
+
+---
+
+<!-- BEGIN qingshanjiluo-collection -->
+
+## 本合集：qingshanjiluo 已实现插件
+
+下列 32 个插件为真实可加载的 Cordis 函数工具插件（inject=['tools'] + defineTool 注册），每仓库自带单元测试与构建产物加载冒烟（install→tsc→build→vitest→load-smoke 全绿）。已从早期虚构 API（createPlugin(settings,tools,commands) / tools.register({handler})）整体重写；命令执行类（docker / test-runner / api-tester / vision-ocr）通过可注入 runCommand 接缝实现，单测喂假数据、不触发真实进程。含 3 个新插件：dsh-subagent-mode（子代理内置模式）、dsh-context-manager（上下文压缩/查找）、dsh-vision-ocr（非识图模型 OCR+YOLO 视觉替代）。
+
+安装（发布到 npm 后）：
+
+```
+npx -y @deepseek-ai/dsh plugin --profile web add @qingshanjiluo/<插件名>
+```
+
+| 插件 | npm 包 | 注册工具 | 简介 |
+| --- | --- | --- | --- |
+| [dsh-ai-commit](https://github.com/qingshanjiluo/dsh-ai-commit) | `@qingshanjiluo/dsh-ai-commit` | ai_commit_suggest, ai_commit_validate | DeepSeek Harness plugin: heuristic Conventional Commits message suggestion and validation as model tools. |
+| [dsh-api-doc-gen](https://github.com/qingshanjiluo/dsh-api-doc-gen) | `@qingshanjiluo/dsh-api-doc-gen` | api_doc_scan, api_doc_preview | DeepSeek Harness plugin: parse JavaScript/TypeScript source text and turn JSDoc/line comments into an API outline or a Markdown reference |
+| [dsh-api-tester](https://github.com/qingshanjiluo/dsh-api-tester) | `@qingshanjiluo/dsh-api-tester` | api_request, api_collection_plan | DeepSeek Harness plugin: single HTTP request execution through an injectable fetch seam plus offline API collection plan validation |
+| [dsh-changelog-gen](https://github.com/qingshanjiluo/dsh-changelog-gen) | `@qingshanjiluo/dsh-changelog-gen` | changelog_group, changelog_generate | DeepSeek Harness plugin: format supplied conventional commits into CHANGELOG sections as model tools. |
+| [dsh-code-review-ai](https://github.com/qingshanjiluo/dsh-code-review-ai) | `@qingshanjiluo/dsh-code-review-ai` | review_text, review_diff | DeepSeek Harness plugin: deterministic static heuristics that review supplied code text and unified diffs. |
+| [dsh-color-palette](https://github.com/qingshanjiluo/dsh-color-palette) | `@qingshanjiluo/dsh-color-palette` | color_convert, color_harmony, color_contrast, color_shades | DeepSeek Harness plugin: pure color-space conversion, harmony palettes, WCAG contrast ratios, and lightness ramps as model tools. |
+| [dsh-commit-lint](https://github.com/qingshanjiluo/dsh-commit-lint) | `@qingshanjiluo/dsh-commit-lint` | lint_commit, lint_staged | DeepSeek Harness plugin: Conventional Commits message linting and staged-file review as model tools. |
+| [dsh-context-manager](https://github.com/qingshanjiluo/dsh-context-manager) | `@qingshanjiluo/dsh-context-manager` | ctx_stats, ctx_search, ctx_compact, ctx_recentTasks | DeepSeek Harness plugin: deterministic transcript stats, keyword search, model-free compaction, and recent-task extraction as model tools. |
+| [dsh-db-visualizer](https://github.com/qingshanjiluo/dsh-db-visualizer) | `@qingshanjiluo/dsh-db-visualizer` | db_parse_schema, db_er_mermaid, db_analyze | DeepSeek Harness plugin: offline SQL DDL parsing, Mermaid ER diagrams, and schema hygiene findings as model tools. |
+| [dsh-dependency-graph](https://github.com/qingshanjiluo/dsh-dependency-graph) | `@qingshanjiluo/dsh-dependency-graph` | dep_circular, dep_orphans, dep_impact | DeepSeek Harness plugin: circular-dependency, orphan, and change-impact analysis over caller-supplied import graphs as model tools. |
+| [dsh-deploy-manager](https://github.com/qingshanjiluo/dsh-deploy-manager) | `@qingshanjiluo/dsh-deploy-manager` | deploy_plan, deploy_generate_config, deploy_validate_config | DeepSeek Harness plugin: offline deploy planning, deploy-config generation, and YAML/JSON config validation as model tools. |
+| [dsh-docker](https://github.com/qingshanjiluo/dsh-docker) | `@qingshanjiluo/dsh-docker` | docker_ps, docker_logs, docker_compose_config | DeepSeek Harness plugin: Docker container inspection and Compose-file validation as model tools, behind an injectable command seam. |
+| [dsh-docstring-gen](https://github.com/qingshanjiluo/dsh-docstring-gen) | `@qingshanjiluo/dsh-docstring-gen` | doc_scaffold, doc_scan | DeepSeek Harness plugin: regex-based docstring scaffolds (JSDoc, Python docstring, reStructuredText) and undocumented-symbol scans for source text. |
+| [dsh-env-switcher](https://github.com/qingshanjiluo/dsh-env-switcher) | `@qingshanjiluo/dsh-env-switcher` | env_parse, env_diff, env_validate, env_serialize | DeepSeek Harness plugin: pure .env text tools - parse, diff, validate against a schema, and serialize back to file content. |
+| [dsh-github-actions](https://github.com/qingshanjiluo/dsh-github-actions) | `@qingshanjiluo/dsh-github-actions` | gh_workflow_validate, gh_workflow_outline, gh_matrix_expand | DeepSeek Harness plugin: offline GitHub Actions workflow YAML validation, outlining, and matrix expansion as model tools. |
+| [dsh-gitignore-gen](https://github.com/qingshanjiluo/dsh-gitignore-gen) | `@qingshanjiluo/dsh-gitignore-gen` | gitignore_generate, gitignore_detect | DeepSeek Harness plugin: pure .gitignore generation from embedded templates and path-based template detection. |
+| [dsh-git-workflow](https://github.com/qingshanjiluo/dsh-git-workflow) | `@qingshanjiluo/dsh-git-workflow` | git_branch_plan, git_conflicts_parse, git_log_format | DeepSeek Harness plugin: validated git branch command planning behind an injectable runner, plus pure parsers for conflicts and git log output. |
+| [dsh-json-yaml-converter](https://github.com/qingshanjiluo/dsh-json-yaml-converter) | `@qingshanjiluo/dsh-json-yaml-converter` | convert_format, validate_json, prettify | DeepSeek Harness plugin: JSON <-> YAML conversion, JSON validation, and prettifying as model tools. |
+| [dsh-lint-config](https://github.com/qingshanjiluo/dsh-lint-config) | `@qingshanjiluo/dsh-lint-config` | lint_generate, lint_checkPackage | DeepSeek Harness plugin: generate ESLint flat-config or Biome config text from style/TS/framework choices, and detect which linters apply from a package.json string. |
+| [dsh-markdown-preview](https://github.com/qingshanjiluo/dsh-markdown-preview) | `@qingshanjiluo/dsh-markdown-preview` | md_outline, md_lint, md_extract_code | DeepSeek Harness plugin: markdown heading outline, style linting, and fenced-code extraction as model tools. |
+| [dsh-mock-server](https://github.com/qingshanjiluo/dsh-mock-server) | `@qingshanjiluo/dsh-mock-server` | mock_fromOpenApi, mock_routes, mock_validateSpec | DeepSeek Harness plugin: offline OpenAPI-to-mock generators that emit an Express/Koa stub source, plan a route table, and validate a spec — no listener, no network. |
+| [dsh-model-router](https://github.com/qingshanjiluo/dsh-model-router) | `@qingshanjiluo/dsh-model-router` | model_recommend, model_compare, model_cost | DeepSeek Harness plugin: deterministic model recommendation, comparison, and cost estimation over a built-in static catalog. |
+| [dsh-pomodoro](https://github.com/qingshanjiluo/dsh-pomodoro) | `@qingshanjiluo/dsh-pomodoro` | pomodoro_start, pomodoro_status, pomodoro_stop, pomodoro_stats | DeepSeek Harness plugin: an in-memory Pomodoro focus timer with start/status/stop/stats tools. |
+| [dsh-project-scaffold](https://github.com/qingshanjiluo/dsh-project-scaffold) | `@qingshanjiluo/dsh-project-scaffold` | scaffold_list, scaffold_plan, scaffold_preview, scaffold_write | DeepSeek Harness plugin: offline project scaffolding — list templates, plan a file map, preview a rendered tree, and optionally write it to disk. |
+| [dsh-regex-playground](https://github.com/qingshanjiluo/dsh-regex-playground) | `@qingshanjiluo/dsh-regex-playground` | regex_test, regex_explain, regex_common | DeepSeek Harness plugin: pure regex testing, token-by-token explanation, and a curated pattern library as model tools. |
+| [dsh-security-audit](https://github.com/qingshanjiluo/dsh-security-audit) | `@qingshanjiluo/dsh-security-audit` | scan_secrets, audit_package | DeepSeek Harness plugin: offline secret-signature scan over supplied file contents plus heuristic risky-dependency audit of a package.json body. |
+| [dsh-sql-formatter](https://github.com/qingshanjiluo/dsh-sql-formatter) | `@qingshanjiluo/dsh-sql-formatter` | sql_format, sql_analyze, sql_index_suggestions | DeepSeek Harness plugin: pure-SQL formatter, static query analyzer, and index suggestions. |
+| [dsh-subagent-mode](https://github.com/qingshanjiluo/dsh-subagent-mode) | `@qingshanjiluo/dsh-subagent-mode` | role_list, role_prompt, plan_steps | DeepSeek Harness plugin: built-in specialist sub-agent roles plus a deterministic step decomposer, as pure model tools. |
+| [dsh-test-runner](https://github.com/qingshanjiluo/dsh-test-runner) | `@qingshanjiluo/dsh-test-runner` | detect_test_framework, test_parseOutput, test_run | DeepSeek Harness plugin: detect a project's test framework, build a validated run command, and parse runner output, behind an injectable command seam. |
+| [dsh-time-tracker](https://github.com/qingshanjiluo/dsh-time-tracker) | `@qingshanjiluo/dsh-time-tracker` | timer_start, timer_stop, timer_status, timer_log, timer_report | DeepSeek Harness plugin: start/stop timers, backfill work logs, and report tracked time behind an injectable clock and storage seam. |
+| [dsh-vision-ocr](https://github.com/qingshanjiluo/dsh-vision-ocr) | `@qingshanjiluo/dsh-vision-ocr` | ocr_image, detect_objects, describe_scene | DeepSeek Harness plugin: give text-only models vision via injectable CLI OCR (tesseract) and optional YOLO-style object detection. |
+| [dsh-webhook-tester](https://github.com/qingshanjiluo/dsh-webhook-tester) | `@qingshanjiluo/dsh-webhook-tester` | webhook_generate_sample, webhook_verify_signature, webhook_parse_request | DeepSeek Harness plugin: offline webhook sample generation, HMAC-SHA256 signature verification, and raw HTTP request parsing as model tools. |
+
+<!-- END qingshanjiluo-collection -->
