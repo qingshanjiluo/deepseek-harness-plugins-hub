@@ -372,6 +372,8 @@ npx -y @deepseek-ai/dsh plugin --profile web add @qingshanjiluo/<插件名>
 
 启用后需重启 DSH 生效；重启前可用 `dsh --profile web --dump-config` 预览某插件是否已纳入 bundle。
 
+一键安装全部（推荐）：用聚合安装器 [`@qingshanjiluo/dsh-plugin-suite`](https://github.com/qingshanjiluo/dsh-plugin-suite) —— `npx -y @qingshanjiluo/dsh-plugin-suite install --profile web`（子命令：list / install / uninstall / status / configure / doctor；详见其 README）。
+
 | 插件 | npm 包 | 注册工具 | 简介 |
 | --- | --- | --- | --- |
 | [[dsh-ai-commit](https://github.com/qingshanjiluo/dsh-ai-commit)] | `@qingshanjiluo/dsh-ai-commit` | ai_commit_suggest, ai_commit_validate | DeepSeek Harness plugin: heuristic Conventional Commits message suggestion and validation as model tools. |
